@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
+const StationEnum = ['Station1', 'Station2', 'Station3', 'Station4', 'Station5'];
+
+
 const reportSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  status: { type: Boolean, required: true }
-}, {
-  versionKey: false  // Disables the __v field
 });
 
 
