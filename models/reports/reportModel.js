@@ -1,19 +1,16 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const StationEnum = ['TAPI', 'STORAGE', 'PRODUCTION', 'PACKING', 'QC', 'FINISHED'];
 const ActivitiesEnum = ['OPTICA', 'PRINT', 'ARMY', 'PRIVAYECUSTOMER', 'CHECKING'];
 
-const reportSchema = new mongoose.Schema({
-  // id
-  catalogNum: { type: Number, reuired:true },
-  count: { type:Number },
-  openDate: { type: Date, reuired:true },
+const reportSchema = new Schema({
+  reportCatalogNum: { type: Number, required: true },
+  openDate: { type: Date, required: true },
   closeDate: { type: Date },
-  workersList: [ WorkerScheme ], // Reference to Worker schema
-  currentStation: { type: String, enum: StationEnum, required:true }, // Enum field for station
+  workersList: [{ type: Schema.Types.ObjectId, ref: 'Worker' }], // Referencing Worker schema
+  currentStation: { type: String, enum: StationEnum, required: true },
   activity: { type: String, enum: ActivitiesEnum },
-  partsList: { type: [partSchema], required:true }, // Array of partSchema
 });
-
 
 module.exports = mongoose.model('Report', reportSchema);
