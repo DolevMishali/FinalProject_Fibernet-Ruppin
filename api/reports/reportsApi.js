@@ -29,7 +29,7 @@ router.put("/reports/:id", (req, res) => {
   const updatedData = req.body;
 
   reportController
-    .updateReport(reportId, updatedData)
+    .updateReportByID(reportId, updatedData)
     .then((updatedReport) => {
       if (!updatedReport) {
         // No report was found with the given ID
@@ -42,17 +42,54 @@ router.put("/reports/:id", (req, res) => {
     });
 });
 
-router.delete("/api/reports/:id", (req, res) => {
+router.put('/reports/title/:title', async (req, res) => {
+  const { title } = req.params;
+  const updatedData = req.body;
+
+  try {
+    const report = await reportController.updateReportByTitle(title, updatedData);
+    res.status(200).json(report);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.delete("/reports/:id", (req, res) => {
   const reportId = req.params.id;
 
   reportController
-    .deleteReport(reportId)
+    .deleteReportById(reportId)
     .then(() => {
       res.status(200).send({ message: "Report successfully deleted" });
     })
     .catch((err) => {
       res.status(500).send(err);
     });
+});
+
+router.delete("/reports/title/:title", async (req, res) => {
+  const title = req.params.title;
+
+  try {
+    const result = await reportController.deleteReportByTitle(title);
+    res.status(200).send(result);
+  } catch (err) {
+    if (err.message === 'No report found with the given title') {
+      res.status(404).send({ message: err.message });
+    } else {
+      res.status(500).send({ message: err.message });
+    }
+  }
+});
+
+router.delete("/reports", async (req, res) => {
+  try {
+    const result = await reportController.deleteAllReports();
+    res.status(200).send(result);
+    res.status(200).send({ message: "Reports successfully deleted" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
 });
 
 
