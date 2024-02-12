@@ -21,3 +21,17 @@ exports.createReport = (data) => {
 exports.updateReport = (reportId, updatedData) => {
   return Report.findByIdAndUpdate(reportId, updatedData, { new: true });
 };
+
+exports.deleteReport = async (reportId) => {
+  try {
+    const deletedReport = await Report.findByIdAndDelete(reportId);
+    if (!deletedReport) {
+      throw new Error('Report not found');
+    }
+    return deletedReport;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+

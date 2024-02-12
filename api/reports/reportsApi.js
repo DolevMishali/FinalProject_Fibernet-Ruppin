@@ -42,4 +42,18 @@ router.put("/reports/:id", (req, res) => {
     });
 });
 
+router.delete("/api/reports/:id", (req, res) => {
+  const reportId = req.params.id;
+
+  reportController
+    .deleteReport(reportId)
+    .then(() => {
+      res.status(200).send({ message: "Report successfully deleted" });
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+
 module.exports = router;
