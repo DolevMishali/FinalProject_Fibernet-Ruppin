@@ -6,11 +6,16 @@ const ActivitiesEnum = ['OPTICA', 'PRINT', 'ARMY', 'PRIVAYECUSTOMER', 'CHECKING'
 
 const reportSchema = new Schema({
   reportCatalogNum: { type: Number, required: true },
-  openDate: { type: Date, required: true },
-  closeDate: { type: Date },
-  workersList: [{ type: Schema.Types.ObjectId, ref: 'Worker' }], // Referencing Worker schema
+  title: { type: String, required: true },
+  reportDescription: { type: String, required: true },
   currentStation: { type: String, enum: StationEnum, required: true },
   activity: { type: String, enum: ActivitiesEnum },
-});
+  openDate: { type: Date, required: true },
+  closeDate: { type: Date,  },
+  workersList: [{ type: Schema.Types.ObjectId, ref: 'Worker' }], // Referencing Worker schema
+  procutList: [{ type: Schema.Types.ObjectId, ref: 'Product' }], // Referencing Product schema
+  },{
+    versionKey: false
+  });
 
 module.exports = mongoose.model('Report', reportSchema);
