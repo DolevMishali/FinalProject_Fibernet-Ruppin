@@ -6,6 +6,12 @@
 
 ###
 
+<div align="center">
+  <img height="200" src="https://media.giphy.com/media/l46Cy1rHbQ92uuLXa/giphy.gif?cid=790b7611qczojrg8x9t99vnqw7jru5byu1amqfz0p4p4k8wa&ep=v1_gifs_search&rid=giphy.gif&ct=g"  />
+</div>
+
+###
+
 <h5 align="left">Authors</h5>
 
 ###
