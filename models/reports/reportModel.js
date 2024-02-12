@@ -11,7 +11,8 @@ const reportSchema = new Schema({
   currentStation: { type: String, enum: StationEnum, required: true },
   activity: { type: String, enum: ActivitiesEnum },
   openDate: { type: Date, required: true },
-  closeDate: { type: Date,  },
+  closeDate: { type: Date, },
+  transferBetweenStations: [{ type: Schema.Types.ObjectId, ref: 'Transfer' }], // Referencing Worker schema
   workersList: [{ type: Schema.Types.ObjectId, ref: 'Worker' }], // Referencing Worker schema
   procutList: [{ type: Schema.Types.ObjectId, ref: 'Product' }], // Referencing Product schema
   },{
